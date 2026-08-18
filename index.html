@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Retail Strategy</title>
+    <style>
+        :root {
+            --primary: #111827;
+            --secondary: #4f46e5;
+            --secondary-hover: #4338ca;
+            --bg: #f9fafb;
+            --surface: #ffffff;
+            --text: #374151;
+            --border: #e5e7eb;
+            --accent: #f59e0b;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            color: #4b5563;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background-color: #f5f3ff;
+        }
+
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        /* Tab Content Styling */
+        .tab-content {
+            display: none;
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Case Study Text Styling */
+        .case-study h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .case-study .meta {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .case-study p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #374151;
+            text-align: justify;
+        }
+
+        .case-study h3 {
+            margin: 2.5rem 0 1rem;
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-left: 4px solid var(--secondary);
+            padding-left: 0.75rem;
+        }
+
+        .case-study ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .references {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .references h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .references p {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            text-align: left;
+            padding-left: 1.5rem;
+            text-indent: -1.5rem;
+        }
+
+        /* Question Blocks */
+        .group-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .group-header h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .question-card {
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .workspace textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #111827;
+            resize: vertical;
+            background-color: var(--surface);
+            transition: all 0.2s ease;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .workspace textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15), inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .save-indicator {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--success);
+            font-weight: 500;
+            margin-top: 0.5rem;
+            height: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Print Media Optimization */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                color: #000;
+            }
+            .tabs, .save-indicator, .meta {
+                display: none !important;
+            }
+            .tab-content {
+                display: block !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin-bottom: 3rem;
+                page-break-after: always;
+            }
+            .question-card {
+                page-break-inside: avoid;
+                background: transparent !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 5px solid #000 !important;
+                padding: 1.5rem !important;
+                margin-bottom: 2rem !important;
+            }
+            .workspace textarea {
+                border: 1px solid #94a3b8 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                min-height: 250px;
+            }
+            header {
+                box-shadow: none !important;
+                border: none !important;
+                border-bottom: 2px solid #000 !important;
+                padding: 1rem 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Luxury Retail Strategy</h1>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="switchTab(event, 'case-study')">Case Study</button>
+        <button class="tab-btn" onclick="switchTab(event, 'group-1')">Group 1 Tasks</button>
+        <button class="tab-btn" onclick="switchTab(event, 'group-2')">Group 2 Tasks</button>
+        <button class="tab-btn" onclick="switchTab(event, 'group-3')">Group 3 Tasks</button>
+    </nav>
+
+    <!-- TAB 1: Case Study Content -->
+    <div id="case-study" class="tab-content active case-study">
+        <h2>Luxury Brands Rethink Retail Strategy as Physical Stores Become Destinations, Not Just Sales Channels</h2>
+        <div class="meta">
+            <span><strong>Published:</strong> July 2026</span>
+            <span>|</span>
+            <span><strong>Focus:</strong> Global Luxury Strategy</span>
+        </div>
+        
+        <p>For years, many retailers invested heavily in e-commerce as consumers embraced online shopping. Yet across the luxury fashion industry, physical stores are once again becoming an important part of brand strategy—not simply as places to purchase products, but as destinations designed to create memorable customer experiences.</p>
+        
+        <p>According to the Vogue Business Custom Insights Team, in partnership with Phronesis Partners, luxury brands are rethinking how their retail networks contribute to customer engagement as traditional retail continues to evolve. Rather than measuring success solely through sales per square metre, brands are increasingly evaluating how their stores encourage customer interaction, strengthen brand perception, and complement digital channels. (Vogue)</p>
+        
+        <h3>From Selling Products to Creating Destinations</h3>
+        <p>The report highlights that attracting shoppers into physical stores has become increasingly challenging as online shopping offers greater convenience. Instead of competing directly with digital channels, many luxury retailers are redesigning their stores to provide experiences that customers cannot easily replicate online.</p>
+        
+        <p>These include exclusive in-store events, personalised consultations, curated product displays, and immersive retail environments that encourage customers to spend more time exploring the brand. According to the report, stores are no longer viewed merely as transaction points but as strategic touchpoints within a broader customer journey. (Vogue)</p>
+        
+        <p>This reflects an important shift in the Place element of the marketing mix. Distribution is no longer concerned only with making products available; it also involves determining how customers experience the brand through carefully designed physical and digital channels.</p>
+        
+        <h3>Physical Stores Still Matter in a Digital World</h3>
+        <p>Although digital commerce continues to grow, the report suggests that luxury brands are not abandoning brick-and-mortar retail. Instead, they are redefining the role of physical stores within an omnichannel strategy.</p>
+        
+        <p>The Vogue Business Custom Insights Team notes that successful retailers are integrating online and offline experiences so that customers can move seamlessly between digital research and in-store purchasing. Rather than replacing stores, digital platforms often encourage customers to visit physical locations for personalised services, exclusive collections, or premium shopping experiences. (Vogue)</p>
+        
+        <p>Industry observations also indicate that retailers are increasingly using online platforms to direct customers towards physical stores through appointment bookings, inventory visibility, and exclusive in-store experiences. Retail technology experts similarly argue that retailers can increase store visits by making store information easily accessible online, promoting in-store events, and offering services such as click-and-collect. (Lightspeed)</p>
+        
+        <h3>Local Experiences Become a Competitive Advantage</h3>
+        <p>One emerging trend identified in the report is the growing importance of localisation. Rather than offering identical shopping experiences worldwide, luxury brands are designing stores that reflect local culture, architecture, and consumer preferences.</p>
+        
+        <p>By creating unique experiences in different cities, retailers encourage customers to visit stores even when similar products are available elsewhere. This approach helps transform physical locations into destinations that contribute to brand storytelling rather than simply functioning as sales outlets. (Vogue)</p>
+        
+        <p>Retail consultant perspectives cited by Vogue Business further suggest that personalised customer service—including personal shopping and exclusive in-store experiences—is becoming increasingly valuable as brands seek to differentiate themselves from purely online competitors. (Vogue)</p>
+        
+        <h3>Rethinking "Place" in Modern Marketing</h3>
+        <p>The developments highlighted by Vogue Business demonstrate that Place has evolved far beyond selecting store locations or determining distribution channels.</p>
+        
+        <p>Today's retailers must decide:</p>
+        <ul>
+            <li>where customers encounter the brand,</li>
+            <li>how physical and digital channels complement one another,</li>
+            <li>what experiences encourage store visits, and</li>
+            <li>how retail environments reinforce brand identity.</li>
+        </ul>
+        
+        <p>For luxury brands, successful distribution strategies now combine flagship stores, boutiques, digital platforms, and personalised services into a unified customer experience. Rather than viewing physical stores as competing with e-commerce, many companies increasingly position them as destinations that strengthen customer relationships and long-term brand loyalty. (Vogue)</p>
+        
+        <div class="references">
+            <h4>References (APA 7th Edition)</h4>
+            <p>Lightspeed Commerce. (2025). 9 tips for converting website traffic into store traffic. https://www.lightspeedhq.com/blog/retail-store-foot-traffic/</p>
+            <p>Vogue Business Custom Insights Team, & Phronesis Partners. (2025, March 26). How to drive footfall in a retail fallout. Vogue Business. https://www.vogue.com/article/how-to-drive-footfall-in-a-retail-fallout</p>
+            <p>Vogue Business. (2026). What a winning retail strategy looks like in 2026. https://www.vogue.com/article/what-a-winning-retail-strategy-looks-like-in-2026</p>
+        </div>
+    </div>
+
+    <!-- TAB 2: Group 1 Questions -->
+    <div id="group-1" class="tab-content">
+        <div class="group-header">
+            <h2>Group 1 Discussion Questions</h2>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">1. The case study highlights that luxury brands no longer view physical stores purely as transaction points, but as strategic touchpoints within a broader customer journey. Map out a hypothetical journey for a modern consumer purchasing a luxury item. At what stages do they interact with digital platforms versus the physical destination, and how can a brand ensure these transitions feel seamless rather than fragmented?</div>
+            <div class="workspace">
+                <textarea id="q-g1-1" placeholder="Type your answers, ideas, or notes here... Progress is auto-saved locally." oninput="autoSave('q-g1-1')"></textarea>
+                <div class="save-indicator" id="saved-q-g1-1">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">2. Historically, retail success was measured primarily by "sales per square metre". If physical stores are now shifting toward generating "brand perception" and "customer interaction," how should executive leadership justify the high financial cost of maintaining prime real estate? What new, non-traditional metrics should they use to measure the return on investment (ROI) of a destination store?</div>
+            <div class="workspace">
+                <textarea id="q-g1-2" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g1-2')"></textarea>
+                <div class="save-indicator" id="saved-q-g1-2">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">3. Experts suggest that digital features like inventory visibility and appointment bookings drive foot traffic to brick-and-mortar stores. However, if online shopping offers total convenience, what specific psychological or emotional barriers might still prevent a consumer from transitioning from an online browser to an in-store visitor, and how can a brand leverage "exclusive in-store events" to overcome them?</div>
+            <div class="workspace">
+                <textarea id="q-g1-3" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g1-3')"></textarea>
+                <div class="save-indicator" id="saved-q-g1-3">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: Group 2 Questions -->
+    <div id="group-2" class="tab-content">
+        <div class="group-header">
+            <h2>Group 2 Discussion Questions</h2>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">1. The text states that the "Place" element of the marketing mix is no longer concerned only with making products available, but with determining how customers experience the brand. In modern luxury marketing, has "Place" become so interconnected with "Promotion" and "Product" that they can no longer be separated? Explain how an immersive retail environment functions simultaneously as a distribution channel and a promotional tool.</div>
+            <div class="workspace">
+                <textarea id="q-g2-1" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g2-1')"></textarea>
+                <div class="save-indicator" id="saved-q-g2-1">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">2. Luxury brands are increasingly designing stores that reject global uniformity in favour of reflecting local culture, architecture, and consumer preferences. While this creates a unique destination, does it run the risk of diluting or confusing the brand’s global, unified core identity? How can a brand maintain a consistent global image while heavily localizing its individual stores?</div>
+            <div class="workspace">
+                <textarea id="q-g2-2" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g2-2')"></textarea>
+                <div class="save-indicator" id="saved-q-g2-2">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">3. If any competitor can replicate a product or copy an e-commerce website design, the case study argues that unique localized experiences and personalized service become a primary competitive advantage. Beyond luxury fashion, what other retail sectors could successfully adopt this destination-driven strategy to insulate themselves against purely online e-commerce giants, and which sectors would fail if they tried it?</div>
+            <div class="workspace">
+                <textarea id="q-g2-3" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g2-3')"></textarea>
+                <div class="save-indicator" id="saved-q-g2-3">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: Group 3 Questions -->
+    <div id="group-3" class="tab-content">
+        <div class="group-header">
+            <h2>Group 3 Discussion Questions</h2>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">1. Why is the destination-store model uniquely critical for luxury brands compared to mass-market fast-fashion retailers? Analyze the psychological link between paying a premium price for a luxury product and the physical environment in which it is acquired. Can long-term brand loyalty truly be sustained if a luxury consumer only interacts with a brand via digital screens?</div>
+            <div class="workspace">
+                <textarea id="q-g3-1" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g3-1')"></textarea>
+                <div class="save-indicator" id="saved-q-g3-1">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">2. Retail consultants emphasize that personalized customer service—like personal shopping and exclusive consultations—differentiates physical stores from digital channels. However, deep personalization requires data collection. How can a luxury brand gather enough consumer data through online channels to personalize an in-store visit seamlessly without making the consumer feel their privacy has been compromised?</div>
+            <div class="workspace">
+                <textarea id="q-g3-2" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g3-2')"></textarea>
+                <div class="save-indicator" id="saved-q-g3-2">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">3. The case study outlines the landscape of retail strategy up through 2026, showcasing a distinct pivot back to physical spaces acting as brand destinations. Looking forward toward the next decade, do you see this trend intensifying, or will it naturally plateau? Debate whether emerging technologies (like virtual reality spaces or advanced AI styling) will eventually replicate the "immersive retail environments" described in the report, or if the human desire for physical tactile interaction will always protect brick-and-mortar retail.</div>
+            <div class="workspace">
+                <textarea id="q-g3-3" placeholder="Type your answers, ideas, or notes here..." oninput="autoSave('q-g3-3')"></textarea>
+                <div class="save-indicator" id="saved-q-g3-3">✓ Progress Saved Automatically</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tab controller
+    function switchTab(event, tabId) {
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Auto-save function utilizing LocalStorage
+    let saveTimeouts = {};
+    function autoSave(textareaId) {
+        const textValue = document.getElementById(textareaId).value;
+        localStorage.setItem(textareaId, textValue);
+        
+        const indicator = document.getElementById('saved-' + textareaId);
+        indicator.style.opacity = '1';
+        
+        clearTimeout(saveTimeouts[textareaId]);
+        saveTimeouts[textareaId] = setTimeout(() => {
+            indicator.style.opacity = '0';
+        }, 1500);
+    }
+
+    // Load responses on tab initialize
+    window.addEventListener('DOMContentLoaded', () => {
+        const inputIds = [
+            'q-g1-1', 'q-g1-2', 'q-g1-3',
+            'q-g2-1', 'q-g2-2', 'q-g2-3',
+            'q-g3-1', 'q-g3-2', 'q-g3-3'
+        ];
+        
+        inputIds.forEach(id => {
+            const savedData = localStorage.getItem(id);
+            if (savedData) {
+                document.getElementById(id).value = savedData;
+            }
+        });
+    });
+</script>
+</body>
+</html>
